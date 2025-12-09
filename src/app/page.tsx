@@ -59,7 +59,8 @@ export default function Home() {
     setStatus(null);
     setCreating(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || ""}/users`, {
+      // Use public registration endpoint so new users can sign up before logging in
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || ""}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

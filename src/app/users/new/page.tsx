@@ -16,19 +16,14 @@ export default function NewUserPage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
-    if (!token) {
-      router.push("/");
-      return;
-    }
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || ""}/users`, {
+      // Allow public self-registration before login
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || ""}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           firstname,
@@ -44,7 +39,8 @@ export default function NewUserPage() {
         setError(data?.message || "Failed to create user");
         return;
       }
-      router.push("/users");
+      // After signup, send user to login page to sign in
+      router.push("/");
     } catch (e) {
       setError("Unable to create user");
     } finally {
