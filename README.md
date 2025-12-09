@@ -11,7 +11,6 @@ navigate to folder 'lemoncodetest\backend', run below command
 php artisan serve --port=8000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 Second, run the FE development server:
 navigate to folder 'lemoncodetest', run below command
